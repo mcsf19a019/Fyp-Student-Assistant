@@ -2,6 +2,7 @@ import { useParams} from 'react-router-dom';
 import { useState, useEffect, Fragment } from "react";
 import NavBarHome from '../RegistrationDir/NavbarHome';
 import StaffNavBar from '../Staff/StaffNavBar';
+import SHNavBarAdmin from '../Admin/SH-NavBarAdmin';
 import Axios from 'axios';
 const NoticeDetail = () => {
     const [title, setTitle] = useState('');
@@ -23,7 +24,13 @@ const NoticeDetail = () => {
                 <StaffNavBar/>
                 </Fragment>)
           }
-          
+          else if(user=="adm")
+          {
+              return(
+              <Fragment>
+                  <SHNavBarAdmin></SHNavBarAdmin>
+              </Fragment>)
+          }
           else if(user == "student"){
             return (
                 <Fragment>

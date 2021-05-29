@@ -91,6 +91,23 @@ app.get('/getNotice/:id', (req,res) =>{
 
 // Sehar backend Code start//
 
+app.post("/register",async(req,res)=>
+{
+    const name=req.body.name;
+    const email=req.body.email;
+    const password=req.body.password;
+    const confirmPass=req.body.confirmPass;
+    const studentType=req.body.studentType;
+    const user=new User ({email:email,name:name,password:password,confirmPassword:confirmPass,userType:studentType});
+    try{
+        await user.save();
+    }catch(err)
+    {
+        console.log(err);
+    }
+});
+
+
 // Sehar backend Code end//
 
 // Ameena backend Code start//

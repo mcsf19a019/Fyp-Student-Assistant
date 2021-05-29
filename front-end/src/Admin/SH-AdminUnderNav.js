@@ -1,16 +1,18 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import NoticeList from './SH-NoticeList';
+import Axios from 'axios';
 const SHAdminUnderNav = () => {
 
-  const[Notices,setNotices]=useState([
-              
-    {title : 'Trip',body:'Trip to naran kaghan,All classes of MSC morning,evening included',author:'Sehar',id:1},
-    {title : 'Shahkar',body:'A Photography Event,All classes of MSC morning,evening included',author:'Mahnoor',id:2},
-    {title : 'BDS',body:'A Blood Donating Event,All classes of MSC morning,evening included',author:'Aymen',id:3}
-  ]);
+  const[Notices,setNotices]=useState([]);
+  useEffect(() => {
+    Axios.get("http://localhost:3001/getNotices").then((Response) =>{  
+      setNotices(Response.data);
+    })
+    
+  }, [])
     return (
         <div className="SH-AdminUnderNav">
-            <NoticeList Notices={Notices} title="All Notices" /> 
+            <NoticeList Notices={Notices} title="All Notices" user={"adm"} /> 
         </div>
       );
 }

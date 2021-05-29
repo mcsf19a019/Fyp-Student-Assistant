@@ -39,6 +39,9 @@ import TEPostList from './TripsDir/TEPostDetails';
 //Sehar
 import SHAdminUnderNav from './Admin/SH-AdminUnderNav';
 import SHNavBarAdmin from './Admin/SH-NavBarAdmin';
+import SHAddNewNotice from './Admin/SH-AddNewNotice';
+import UpdateAdminNotice from './Admin/SH-NoticeEdit';
+import DeleteAdminNotice from './Admin/SH-DeleteNotice';
 
 //Maham
 import MahNavbar from './Admin/MahNavbar';
@@ -158,6 +161,15 @@ function App() {
                 <SHAdminUnderNav></SHAdminUnderNav>
               </div>
             </div>
+          </Route>
+          <Route path="/CreateNoticeAdmin">
+            <SHAddNewNotice></SHAddNewNotice>
+          </Route>
+          <Route path="/editNotice/:id">
+           <UpdateAdminNotice></UpdateAdminNotice>
+          </Route>
+          <Route path="/deleteNotice/:id">
+            <DeleteAdminNotice></DeleteAdminNotice>
           </Route>
 
           {/* Maham Admin Post Handler */}

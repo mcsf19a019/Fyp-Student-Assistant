@@ -1,23 +1,44 @@
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import Navbar from './NavBar';
+import { useState } from 'react';
+import Axios from 'axios';
+
 
 const Registerform = () => {
+    const [name, SetName] = useState('');
+    const [email, SetEmail] = useState('');
+    const [password, SetPassword] = useState('');
+    const [confirmPass, SetconfirmPass] = useState('');
+    const[studentType,setStudentType]=useState('student');
+    let history = useHistory();
+
+    const AddUserToDb=()=>{
+        Axios.post("http://localhost:3001/register",
+        {
+            name,email,password,confirmPass,studentType
+        });
+        history.push("/login");
+    };
+
     return (
 
         <div className="form-content">
             <Navbar />
-            <form className="form1">
+            <form onSubmit={AddUserToDb}className="form1">
                 <div className="form-headings">
                     <h2>Let's get started today!</h2>
                 </div>
 
-                <div className="register-inputs">
+                 <div className="register-inputs"> 
                     <label className="form-label">Name</label>
                     <input className="forminputs"
                         type="text"
                         required
                         name='name'
                         placeholder='Enter your name here'
+                        onChange={(event) => {
+                            SetName(event.target.value)
+                        }}
                     ></input>
                 </div>
 
@@ -28,6 +49,9 @@ const Registerform = () => {
                         required
                         name='email'
                         placeholder='jon@pucit.edu.pk'
+                        onChange={(event) => {
+                            SetEmail(event.target.value)
+                        }}
                     ></input>
                 </div>
 
@@ -36,8 +60,12 @@ const Registerform = () => {
                     <input className="forminputs"
                         type="password"
                         required
+                        minLength="8"
                         name='password'
                         placeholder='Password'
+                        onChange={(event) => {
+                            SetPassword(event.target.value)
+                        }}
                     ></input>
                 </div>
 
@@ -46,21 +74,24 @@ const Registerform = () => {
                     <input className="forminputs"
                         type="password"
                         required
+                        minLength="8"
                         name='password'
                         placeholder='Confirm Password'
+                        onChange={(event) => {
+                            SetconfirmPass(event.target.value)
+                        }}
                     ></input>
                 </div>
 
                 {/* <Link to="/login"> */}
-                    <button className='Signup-butn' type='submit'>
+                    <button className='Signup-butn' >
+
                         Sign Up
-                     </button>
+                    </button>
                 {/* </Link> */}
                 <span className='form-input-login'>
                     <h5>Already have an account? Login</h5>
                     <Link to="/login"> here </Link>
-
-                    {/*  Already have an account? Login <a href='#'>here</a>*/}
                 </span>
             </form>
 
