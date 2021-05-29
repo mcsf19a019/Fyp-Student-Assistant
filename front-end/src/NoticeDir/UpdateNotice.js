@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import StaffNavBar from '../Staff/StaffNavBar';
 import { useState, useEffect } from "react";
 import Axios from 'axios';
@@ -6,6 +6,7 @@ const UpdateNotice = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const { id } = useParams();
+    let history = useHistory();
 
     useEffect(() => {
       Axios.get(`http://localhost:3001/getNotice/${id}`).then((Response) =>{  
@@ -15,6 +16,7 @@ const UpdateNotice = () => {
     }, [])
     const Update = (id) => {
       Axios.put("http://localhost:3001/updateNotice", {id,title,body});
+      history.push("/StaffHome");
       }
     return (  
         <div className="updatenotice">
