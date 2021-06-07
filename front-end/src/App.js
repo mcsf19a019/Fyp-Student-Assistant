@@ -23,13 +23,21 @@ import Reason from './Staff/Reason';
 
 //ameena & maham imports
 import HomeTradingSharing from './TradingAndSharingDir/HomeTradingSharing';
-import Create from './TradingAndSharingDir/Create';
+import CreateTSPost from './TradingAndSharingDir/CreateTSPost';
+import CreateTEPost from './TripsDir/CreateTEPost';
+import CreateLSPost from './LostAndFoundDir/CreateLSPost';
 import NotFound from './TradingAndSharingDir/NotFound';
-import TSPsotDetails from './TradingAndSharingDir/TSPostDetails';
+import TSPostDetails from './TradingAndSharingDir/TSPostDetails';
 import HomeLostFound from './LostAndFoundDir/HomeLostFound';
 import LSPostDetails from './LostAndFoundDir/LSPostDetails';
 import HomeTripsEvents from './TripsDir/HomeTripsEvents';
-import TEPostList from './TripsDir/TEPostDetails';
+import TEPostDetails from './TripsDir/TEPostDetails';
+import DeleteLSPost from './LostAndFoundDir/DeleteLSPost';
+import DeleteTSPost from './TradingAndSharingDir/DeleteTSPost';
+import DeleteTEPost from './TripsDir/HomeTripsEvents';
+import UpdateLSPost from './LostAndFoundDir/UpdateLSPost';
+import UpdateTEPost from './TripsDir/UpdateTEPost';
+import UpdateTSPost from './TradingAndSharingDir/UpdateTSPost';
 
 //
 //
@@ -53,6 +61,7 @@ import LFPostListAdmin from './Admin/LFPostListAdmin';
 import AdminUserList from './Admin/AdminUserList';
 import AdminUserCreate from './Admin/AdminUserCreate';
 import AUserNavbar from './Admin/AUserNavbar';
+//import TEPostDetails from './TripsDir/TEPostDetails';
 
 
 function App() {
@@ -121,8 +130,28 @@ function App() {
           </Route>
 
           {/* Ameena & Maham routes */}
-          <Route path="/Create">
-            <Create />
+          <Route path="/HomeLostFound">
+            <HomeLostFound />
+          </Route>
+          <Route path="/lfblogs/:id/:user">
+            <LSPostDetails />
+          </Route>
+          <Route path="/delete/:id">
+            <DeleteLSPost />
+          </Route>
+          <Route path="/update/:id">
+            <MahNavbar/>
+            <UpdateLSPost />
+          </Route>
+          <Route path="/CreateLSPost">
+            <CreateLSPost />
+          </Route>
+
+          <Route path="/CreateTSPost">
+            <CreateTSPost />
+          </Route>
+          <Route path="/tsblogs/:id/:user">
+            <TSPostDetails />
           </Route>
           <Route path="/HomeTradingSharing">
             <HomeTradingSharing />
@@ -130,20 +159,27 @@ function App() {
           <Route path="/NotFound">
             <NotFound />
           </Route>
-          <Route path="/tsblogs/:id">
-            <TSPsotDetails />
+          <Route path="/delete/:id">
+            <DeleteTSPost />
           </Route>
-          <Route path="/HomeLostFound">
-            <HomeLostFound />
+          <Route path="/update/:id">
+            <UpdateTSPost />
           </Route>
-          <Route path="/lfblogs/:id">
-            <LSPostDetails />
+          
+          <Route path="/CreateTEPost">
+            <CreateTEPost />
           </Route>
           <Route path="/HomeTripsEvents">
             <HomeTripsEvents />
           </Route>
           <Route path="/teblogs/:id">
-            <TEPostList />
+            <TEPostDetails />
+          </Route>
+          <Route path="/delete/:id">
+            <DeleteTEPost />
+          </Route>
+          <Route path="/update/:id">
+            <UpdateTEPost />
           </Route>
         </Switch>
 

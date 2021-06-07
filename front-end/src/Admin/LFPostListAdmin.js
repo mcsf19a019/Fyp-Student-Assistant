@@ -1,24 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Axios from 'axios';
 const LFPostListAdmin = () => {
-    const [posts,setposts]=useState([
-        {title: 'Lost and Found First post', body: 'hello G :)', author: 'Sehar', id: 1 },
-        {title: 'I.D card Found', body: 'I found an I.D card...', author: 'Ameena', id: 2 },
-        {title: 'Motivation Lost', body: 'I lost my Motivation in studies if someone found it, give it to me. :D ', author: 'Maham', id: 3 }
-    ]);    
-    const handleDelete =(id)=>{
-        const newPost= posts.filter(posts=>posts.id !==id);
-        setposts(newPost);
+    const [posts,setposts]=useState([]);
+    const [status,setstatus]=useState(Boolean);
+    useEffect(() => {
+        Axios.get("http://localhost:3001/getLfposts").then((Response) =>{  
+          setposts(Response.data);
+        })        
+      }, [])
+
+    const updateStatus =(Boolean)=>{
+        Axios.put("http://localhost:3001/updateLfposts",{
+            id:id,
+            status:true,
+        });
     }
+    const deletePost =(_id)=>{
+        Axios.delete(`http://localhost:3001/deleteLfposts/${_id}`)
+    };
     return (  
-        <div className="TSListAdmin">
+        <div className="LFListAdmin">
              
             {posts.map((posts)=>(
                 <div className="post-preview" key={posts.id}>
                     <h2>{posts.title}</h2>
-                    <p>{posts.body}</p>
-                    <h5>Post by {posts.author}</h5>
-                    <button>Approve</button>
-                    <button onClick={()=> handleDelete(posts.id)}>Delete</button>
+                    <p>{posts.content}</p>
+                    <href>{posts.pic}</href>
+                    <h2>{posts.date}</h2>
+                    <button onClick={()=>updateStatus(posts._id)}>Approve</button>
+                    <button onClick={()=>deletePost(posts._id)}>Delete</button>
                     
                     </div>
             ))}

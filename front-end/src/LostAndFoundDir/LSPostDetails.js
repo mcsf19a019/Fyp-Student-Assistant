@@ -1,27 +1,61 @@
 import { useParams } from "react-router-dom";
+import { useState, useEffect, Fragment } from "react";
 import NavBarHome from '../RegistrationDir/NavbarHome';
-import MiniNavBar from '../TradingAndSharingDir/MiniNavbar';
+import MiniNavBar from './MiniNavbar';
+import SHNavBarAdmin from '../Admin/SH-NavBarAdmin';
+import Axios from 'axios';
 
 const LSPostDetails = () => {
-  const { id } = useParams();
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+  const [body, setBody] = useState('');
+  const [date,setDate] = useState('');
+  const [pic,setPic] = useState('');
+  const { id, user } = useParams();
 
+  useEffect(() => {
+    Axios.get(`http://localhost:3001/getLfPost/${id}`).then((Response) =>{  
+    setTitle(Response.data.title);
+    setBody(Response.data.content);
+    setDate(Response.data.date);
+    setPic(Response.data.pic);
+    })
+  }, [])
+  const checkUsr = (user) =>{
+      if(user=="adm")
+      {
+          return(
+          <Fragment>
+              <SHNavBarAdmin></SHNavBarAdmin>
+          </Fragment>)
+      }
+      else if(user == "student"){
+        return (
+            <Fragment>
+            <NavBarHome/>
+            <MiniNavBar title={"Lost & Found"}/>
+            </Fragment>)
+      }          
+  }
   return (
     <div className="post-details">
-      <NavBarHome/>
-      <MiniNavBar title={"Lost & Found"}/>
-      <h1>Done</h1>
-      <h2>Lost Post no {id}</h2>
+      <div className="">
+          {checkUsr(user)}
+      </div>
+      <br/>
+      <div className="posts_detailPosts">
+        <h3 className="posts_detailPosts_title">{title.toUpperCase()}</h3>
+        <br/>
+        <h5 className="posts_detailPosts_body">{body}</h5>
+        <br/>
+        <h5>{pic}</h5>
+        <br/>
+        <h5 className="posts_detailPosts_author">Posted by: {author.toUpperCase()}</h5>
+        <br/>
+        <h6 className="posts_detailPosts_date"><b className="posts_date">Publish Date:</b> {date}</h6>
+      </div>
     </div>
   );
 }
  
 export default LSPostDetails;
-
-/* { blog && (
-        <div>
-          <h2>{ blog.title }</h2>
-          <h3>Written by { blog.author }</h3>
-          <p>{ blog.body }</p>
-          <h5>{id}</h5>
-          </div>
-      )}*/
