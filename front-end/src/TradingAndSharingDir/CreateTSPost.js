@@ -1,6 +1,6 @@
 import { useState } from "react";
 import NavBarHome from '../RegistrationDir/NavbarHome';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import TSPostList from "./TSPostList";
 import HomeTradingSharing from "./HomeTradingSharing";
 import TSMiniNavBar from './TSMiniNavbar';
@@ -11,6 +11,7 @@ const CreateTSPost = () => {
   const [body, setBody] = useState('');
   const [author, setAuthor] = useState('');
   const [pic, setPic] = useState('');
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     Axios.post("http://localhost:3001/insertTsPosts", {title, body, author, pic});

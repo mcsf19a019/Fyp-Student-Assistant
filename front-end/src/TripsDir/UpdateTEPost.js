@@ -1,4 +1,4 @@
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import SHNavBarAdmin from '../Admin/SH-NavBarAdmin';
 import MahNavbar from '../Admin/MahNavbar';
 import { useState, useEffect } from "react";
@@ -29,7 +29,7 @@ const UpdateTEPost = () => {
             <h3 className="posts_heading">Update Trips and events Post</h3>
             <br/>
             <br/>
-            <form onSubmit={handleSubmit}>
+            <form>
               <div className="register-inputs">
                 <label className="form-label">Post title:</label>
                 <input className="forminputs" 
