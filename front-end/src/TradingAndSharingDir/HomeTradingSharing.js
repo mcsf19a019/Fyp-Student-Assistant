@@ -7,7 +7,7 @@ import Axios from 'axios';
 const HomeTradingSharing = () => {
   const [tsblogs, setBlogs] = useState([]);
   useEffect(() => {
-    Axios.get("http://localhost:3001/getTsPosts").then((Response) =>{  
+    Axios.get("http://localhost:3001/getSTsPosts").then((Response) =>{  
       setBlogs(Response.data);
     })
   }, [])

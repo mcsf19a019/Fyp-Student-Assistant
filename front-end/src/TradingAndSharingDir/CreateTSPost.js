@@ -1,10 +1,7 @@
 import { useState } from "react";
 import NavBarHome from '../RegistrationDir/NavbarHome';
 import { useHistory } from "react-router-dom";
-import TSPostList from "./TSPostList";
-import HomeTradingSharing from "./HomeTradingSharing";
 import TSMiniNavBar from './TSMiniNavbar';
-import { Link } from "react-router-dom";
 import Axios from 'axios';
 
 const CreateTSPost = () => {
@@ -48,17 +45,14 @@ const CreateTSPost = () => {
           <div className="register-inputs">
             <label className="form-label"> Post Image</label>
             <input className="forminputs"
-              type="file" 
-              required 
+              type="file"
               value={pic}
               onChange={(e) => setPic(e.target.file[0])}
             />
           </div>
-          <Link to="/TSPostList">
             <button type='submit'>
               Add Post
             </button>
-          </Link>
         </form>
       </div>
     </div>

@@ -11,11 +11,10 @@ const TsPostsSchema = new mongoose.Schema({
     },
     pic:{
         type: String,
-        required : true
     },
     status:{
         type: Boolean,
-        required: true
+        default: false
     },
     date:{
         type: Date,

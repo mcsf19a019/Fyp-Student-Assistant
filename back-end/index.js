@@ -40,6 +40,44 @@ app.post('/insertLfPosts', (req, res) => {
         console.log(err);
     })
 })
+
+// Student Trading and Sharing
+app.post('/insertTsPosts', (req, res) => {
+    const dt = new Date();
+    const TsPost = new TsPosts({
+        title: req.body.title,
+        content: req.body.body,
+        pic:req.body.pic,
+        date: dt
+    }
+    );
+    TsPost.save()
+    .then((result) => {
+        res.send("Trading and Sharing Data record updated");
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+})
+
+// Student Trading and Sharing
+app.post('/insertTePosts', (req, res) => {
+    const dt = new Date();
+    const TePost = new TePosts({
+        title: req.body.title,
+        content: req.body.body,
+        pic:req.body.pic,
+        date: dt
+    }
+    );
+    TePost.save()
+    .then((result) => {
+        res.send("Trips and Events Data record updated");
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+})
                                                                     //Admin Lost and found
         //getting all posts
  app.get('/getLfPosts', (req,res) =>{
@@ -94,8 +132,8 @@ app.delete("/deleteLfposts/:id",async(req,res)=>{
        })
     })
       //getting approved posts
-  app.get('/getTePosts', (req,res) =>{
-   TePosts.find({$where:{status:"true"}}, (err,result) => {
+  app.get('/getSTePosts', (req,res) =>{
+   TePosts.find({status:"true"}, (err,result) => {
       if(err)
       console.log(err);
                         
@@ -137,8 +175,8 @@ app.delete("/deleteLfposts/:id",async(req,res)=>{
        })
     })
       //getting approved posts
-  app.get('/getTsPosts', (req,res) =>{
-   TsPosts.find({$where:{status:"true"}}, (err,result) => {
+  app.get('/getSTsPosts', (req,res) =>{
+   TsPosts.find({status:"true"}, (err,result) => {
       if(err)
       console.log(err);
                         

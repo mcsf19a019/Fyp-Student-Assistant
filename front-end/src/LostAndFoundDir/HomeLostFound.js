@@ -9,7 +9,6 @@ const HomeLostFound = () => {
   useEffect(() => {
     Axios.get("http://localhost:3001/getSLfPosts").then((Response) =>{  
       setBlogs(Response.data);
-      console.log(Response.data);
     })
   }, [])
 

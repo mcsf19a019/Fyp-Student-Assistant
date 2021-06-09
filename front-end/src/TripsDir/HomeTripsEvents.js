@@ -7,7 +7,7 @@ import Axios from 'axios';
 const HomeTripsEvents = () => {
   const [teblogs, setBlogs] = useState([]);
   useEffect(() => {
-    Axios.get("http://localhost:3001/getTePosts").then((Response) =>{  
+    Axios.get("http://localhost:3001/getSTePosts").then((Response) =>{  
       setBlogs(Response.data);
     })
   }, [])
