@@ -9,9 +9,9 @@ const TSPostListAdmin = () => {
         })        
       }, [])
 
-    const updateStatus =(Boolean)=>{
+    const updateStatus =(_id)=>{
         Axios.put("http://localhost:3001/updateTsPosts",{
-            id:id,
+            id: _id,
             status:true,
         });
     }

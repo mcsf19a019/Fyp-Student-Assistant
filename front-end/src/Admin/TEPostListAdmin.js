@@ -4,17 +4,20 @@ import Axios from 'axios';
 const TEPostListAdmin = () => {
 
     const [posts,setposts]=useState([]);
-    const [status,setstatus]=useState(Boolean);
+    const [status, setstatus]=useState(Boolean);
     useEffect(() => {
         Axios.get("http://localhost:3001/getTePosts").then((Response) =>{  
           setposts(Response.data);
         })        
       }, [])
 
-    const updateStatus =(Boolean)=>{
+    const updateStatus =(_id)=>{
         Axios.put("http://localhost:3001/updateTePosts",{
-            id:id,
-            status:true,
+            //setName(Response.data.name);
+            //setPassword(Response.data.password);
+            //setUserType(Response.data.userType);
+            id: _id ,
+            status:true
         });
     }
     const deletePost =(_id)=>{

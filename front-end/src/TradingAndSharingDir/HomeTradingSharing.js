@@ -5,7 +5,7 @@ import TSMiniNavBar from './TSMiniNavbar';
 import Axios from 'axios';
 
 const HomeTradingSharing = () => {
-  const [lfblogs, setBlogs] = useState([]);
+  const [tsblogs, setBlogs] = useState([]);
   useEffect(() => {
     Axios.get("http://localhost:3001/getTsPosts").then((Response) =>{  
       setBlogs(Response.data);

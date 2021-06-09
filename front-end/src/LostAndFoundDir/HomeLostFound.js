@@ -7,8 +7,9 @@ import Axios from 'axios';
 const HomeLostFound = () => {
   const [lfblogs, setBlogs] = useState([]);
   useEffect(() => {
-    Axios.get("http://localhost:3001/getLfPosts").then((Response) =>{  
+    Axios.get("http://localhost:3001/getSLfPosts").then((Response) =>{  
       setBlogs(Response.data);
+      console.log(Response.data);
     })
   }, [])
 

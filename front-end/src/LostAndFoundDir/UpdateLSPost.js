@@ -1,8 +1,10 @@
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import SHNavBarAdmin from '../Admin/SH-NavBarAdmin';
 import MahNavbar from '../Admin/MahNavbar';
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Axios from 'axios';
+
 const UpdateLSPost = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
@@ -17,6 +19,7 @@ const UpdateLSPost = () => {
       setPic(Response.data.pic);
       })
     }, [])
+
     const Update = (id) => {
       Axios.put("http://localhost:3001/updateLfPost", {id,title,body,pic});
       }

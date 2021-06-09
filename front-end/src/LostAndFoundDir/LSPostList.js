@@ -20,8 +20,8 @@ const LSPostList = ({ blogs,user }) => {
   return (
     <div className="post-list">
       {blogs.map( blog => (
-        <div className="blog-preview" key={blog.id} >
-          <Link to={`/lfblogs/${blog.id}/${user}`}><h4>{blog.title.toUpperCase()}</h4>
+        <div className="blog-preview" key={blog._id} >
+          <Link to={`/lfblogs/${blog._id}/${user}`}><h4>{blog.title.toUpperCase()}</h4>
           <p><b>Publish Date:</b> {blog.date}</p>
             <p><b>Written by: </b>{ blog.author }</p>
           </Link>

@@ -1,8 +1,8 @@
 import { useParams, useHistory } from 'react-router-dom';
 import SHNavBarAdmin from '../Admin/SH-NavBarAdmin';
-import MahNavbar from '../Admin/MahNavbar';
 import { useState, useEffect } from "react";
 import Axios from 'axios';
+import TEMiniNavbar from './TEMiniNavbar';
 
 const DeleteTEPost = () => {
     const { id } = useParams();
@@ -21,13 +21,13 @@ const DeleteTEPost = () => {
     })
   }, [])
 
-  const DeleteTEPost = (id) => {
+  const DeletePost = (id) => {
     Axios.delete(`http://localhost:3001/deleteTePost/${id}`);
     history.push("/SH-AdminUnderNav");
   }
     return (  
         <div className="deletePost">
-           <StaffNavBar/>
+           <TEMiniNavbar />
            <div >
       <h3 className="posts_heading">Delete Post</h3>
       <br/>

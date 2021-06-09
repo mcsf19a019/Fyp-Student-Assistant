@@ -7,7 +7,7 @@ const MiniNavbar = ({title}) => {
     <nav className="psnavbar">
       <h1>{title}</h1>
       <div className="links">
-     <Link to="/create" style={{ 
+     <Link to="/CreateLSPost" style={{ 
            color: 'white', 
           backgroundColor: '#2F9DC6',
           borderRadius: '8px' 

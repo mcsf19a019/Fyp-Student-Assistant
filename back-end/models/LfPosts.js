@@ -11,7 +11,6 @@ const LfPostsSchema = new mongoose.Schema({
     },
     pic:{
         type: String,
-        required : true
     },
     status:{
         type: Boolean,

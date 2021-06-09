@@ -1,8 +1,8 @@
 import { useParams, useHistory } from 'react-router-dom';
 import SHNavBarAdmin from '../Admin/SH-NavBarAdmin';
-import MahNavbar from '../Admin/MahNavbar';
 import { useState, useEffect } from "react";
 import Axios from 'axios';
+import TSMiniNavbar from './TSMiniNavbar';
 
 const DeleteTSPost = () => {
     const { id } = useParams();
@@ -27,7 +27,7 @@ const DeleteTSPost = () => {
   }
     return (  
         <div className="deletePost">
-           <StaffNavBar/>
+           <TSMiniNavbar/>
            <div >
             <h3 className="posts_heading">Delete Post</h3>
             <br/>

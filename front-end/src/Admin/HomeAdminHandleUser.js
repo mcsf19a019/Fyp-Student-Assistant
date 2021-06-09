@@ -1,15 +1,22 @@
+import {useState, useEffect} from 'react';
 import { Link } from "react-router-dom";
+import AdminUserList from './AdminUserList';
+import Axios from 'axios';
 
 const HomeAdminHandleUser = () => {
   //eslint-disable-next-line
 
+  const[User,setUser]=useState([]);
+  useEffect(() => {
+    Axios.get("http://localhost:3001/getUsers").then((Response) =>{  
+      setUser(Response.data);
+    })
+    
+  }, [])
+
   return (
     <div className="home">
-      <Link to="/userlists" style={{ 
-          color: 'black',
-          fontSize: '20px',
-          borderRadius: '8px' 
-        }}>Manage users</Link>
+      <AdminUserList User={User} title="All Users" user={"adm"} /> 
     </div>
   );
 }

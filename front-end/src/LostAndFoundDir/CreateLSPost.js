@@ -1,8 +1,6 @@
 import { useState } from "react";
 import NavBarHome from '../RegistrationDir/NavbarHome';
-import { useHistory, Link } from "react-router-dom";
-import LSPostList from "./LSPostList";
-import HomeLostFound from "./HomeLostFound";
+import { useHistory } from "react-router-dom";
 import MiniNavBar from './MiniNavbar';
 import Axios from 'axios';
 
@@ -11,7 +9,7 @@ const CreateLSPost = () => {
   const [body, setBody] = useState('');
   const [author, setAuthor] = useState('');
   const [pic, setPic] = useState('');
-  const history = useHistory();
+  let history = useHistory();
 
   const handleSubmit = (e) => {
     Axios.post("http://localhost:3001/insertLfPosts", {title, body, author, pic});
@@ -45,19 +43,16 @@ const CreateLSPost = () => {
             />
           </div>
           <div className="register-inputs">
-            <label className="form-label"> Profile Image</label>
+            <label className="form-label"> Post Image </label>
             <input className="forminputs"
-              type="text" 
-              required 
+              type="file"
               value={pic}
-              onChange={(e) => setPic(e.target.file[0])}
+              onChange={(e) => setPic(e.target.file)}
             />
           </div>
-          <Link to="/LSPostList">
             <button type='submit'>
               Add Post
             </button>
-          </Link>
         </form>
       </div>
     </div>

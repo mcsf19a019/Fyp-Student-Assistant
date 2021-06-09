@@ -1,9 +1,10 @@
 import { useState } from "react";
 import NavBarHome from '../RegistrationDir/NavbarHome';
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import TEPostList from "./TEPostList";
 import HomeTripsEvents from "./HomeTripsEvents";
 import TEMiniNavBar from './TEMiniNavbar';
+import { Link } from "react-router-dom";
 import Axios from 'axios';
 
 const CreateTEPost = () => {
@@ -11,7 +12,7 @@ const CreateTEPost = () => {
   const [body, setBody] = useState('');
   const [author, setAuthor] = useState('');
   const [pic, setPic] = useState('');
-  const history = useHistory();
+  let history = useHistory();
 
   const handleSubmit = (e) => {
     Axios.post("http://localhost:3001/insertTePosts", {title, body, author, pic});
@@ -45,7 +46,7 @@ const CreateTEPost = () => {
             />
           </div>
           <div className="register-inputs">
-            <label className="form-label"> Profile Image</label>
+            <label className="form-label"> Post Image </label>
             <input className="forminputs"
               type="file" 
               required 

@@ -1,7 +1,8 @@
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import SHNavBarAdmin from '../Admin/SH-NavBarAdmin';
 import MahNavbar from '../Admin/MahNavbar';
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Axios from 'axios';
 
 const UpdateTSPost = () => {

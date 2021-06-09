@@ -58,11 +58,10 @@ import TSPostListAdmin from './Admin/TSPostListAdmin';
 import LFPostListAdmin from './Admin/LFPostListAdmin';
 
 //Ameena
-import AdminUserList from './Admin/AdminUserList';
+import HomeAdminHandleUser from './Admin/HomeAdminHandleUser';
 import AdminUserCreate from './Admin/AdminUserCreate';
-import AUserNavbar from './Admin/AUserNavbar';
-//import TEPostDetails from './TripsDir/TEPostDetails';
-
+import AdminUserEdit from './Admin/AdminUserEdit';
+import AdminUserDelete from './Admin/AdminUserDelete';
 
 function App() {
   return (
@@ -234,19 +233,25 @@ function App() {
           </Route>
 
           {/* Ameena Admin User Handler */}
-          <Route path="/adminUserLists">
+          <Route path="/HomeAdminHandleUser">
             <div className="Navbar">
               <SHNavBarAdmin></SHNavBarAdmin>
             </div>
-            <AUserNavbar></AUserNavbar>
-            <AdminUserList />
+            <HomeAdminHandleUser />
           </Route>
 
-          <Route path="/createUserByAdmin">
+          <Route path="/updateUser/:id">
+            <AdminUserEdit />
+          </Route>
+
+          <Route path="/deleteUser/:id">
+            <AdminUserDelete />
+          </Route>
+
+          <Route path="/insertUserByAdmin">
             <div className="Navbar">
               <SHNavBarAdmin></SHNavBarAdmin>
             </div>
-            <AUserNavbar></AUserNavbar>
             <AdminUserCreate />
           </Route>
         </Switch>

@@ -44,7 +44,7 @@ app.post('/insertLfPosts', (req, res) => {
         //getting all posts
  app.get('/getLfPosts', (req,res) =>{
 
-  LfPosts.find({}, (err,result) => {
+  LfPosts.find({status:"false"}, (err,result) => {
   if(err)
     console.log(err);
                 
@@ -52,8 +52,8 @@ app.post('/insertLfPosts', (req, res) => {
      })
   })
     //getting approved posts
-app.get('/getLfPosts', (req,res) =>{
- LfPosts.find({$where:{status:"true"}}, (err,result) => {
+app.get('/getSLfPosts', (req,res) =>{
+ LfPosts.find({status:"true"}, (err,result) => {
     if(err)
     console.log(err);
                       
@@ -65,6 +65,7 @@ app.get('/getLfPosts', (req,res) =>{
     try {
         LfPosts.findById(req.body.id, (err,updatedStatus) => {
             updatedStatus.status = true;
+            console.log(updatedStatus.status);
             updatedStatus.save();
             res.send("updateStatus");
 
@@ -254,6 +255,68 @@ app.post("/register",async(req,res)=>
 // Sehar backend Code end//
 
 // Ameena backend Code start//
+
+//insert user by admin
+app.post("/insertUserByAdmin",async(req,res)=>
+{
+    const name=req.body.name;
+    const email=req.body.email;
+    const password=req.body.password;
+    const userType=req.body.userType;
+    const user=new User ({email:email,name:name,password:password,userType:userType});
+    try{
+        await user.save();
+    }catch(err)
+    {
+        console.log(err);
+    }
+});
+
+//getting all users
+app.get('/getUsers', (req,res) =>{
+
+    User.find({}, (err,result) => {
+        if(err)
+        console.log(err);
+        
+        res.send(result);
+    })
+})
+
+// getting specific user from db
+app.get('/getUser/:id', (req,res) =>{
+    User.findById(req.params.id, (err,result) =>{
+        if(err)
+        console.log(err);
+        else
+        res.send(result);
+    })
+})
+
+ // delete User
+ app.delete('/deleteUser/:id', (req, res) => {
+    try {
+        mongoose.set('useFindAndModify', false);  // to remove deprecation warnings
+        User.findByIdAndRemove(req.params.id).exec();
+        res.send("User deleted");
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+//Update User
+app.put('/updateUser', (req, res) => {
+    try {
+        User.findById(req.body.id, (err,updatedUser) => {
+            updatedUser.name = req.body.name;
+            updatedUser.password = req.body.password;
+            updatedUser.userType = req.body.userType;
+            updatedUser.save();
+        });
+    } catch (err) {
+        console.log(err);
+    }
+});
 
 // Ameena backend Code end//
 

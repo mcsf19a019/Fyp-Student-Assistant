@@ -1,7 +1,8 @@
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import SHNavBarAdmin from '../Admin/SH-NavBarAdmin';
 import MahNavbar from '../Admin/MahNavbar';
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Axios from 'axios';
 
 const UpdateTEPost = () => {
@@ -21,6 +22,7 @@ const UpdateTEPost = () => {
     const Update = (id) => {
       Axios.put("http://localhost:3001/updateTePost", {id,title,body,pic});
       }
+
     return (  
         <div className="updatePost">
           <SHNavBarAdmin/>
