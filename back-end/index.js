@@ -360,4 +360,90 @@ app.put('/updateUser', (req, res) => {
 
 // Imran backend Code start//
 
+app.post('/insertclearancereq', (req, res) => {
+    const reqfrom = req.body.application;
+    const dcc = req.body.DCClearance;
+    const sdc = req.body.SecretaryDCClearance;
+    const st = req.body.AssistanceTreasurer;
+    const lb = req.body.Library;
+    const nt= req.body.NetworkAdmin;
+    const ec= req.body.ExamCoordinator;
+    const pc= req.body.ProgramCoordinator;
+    const ml = req.body.MainLibray;
+    const hs= req.body.HostelSuperintendent;
+    const sac= req.body.StudentAffairsCoordinator;
+    const dt= new Date();
+   
+    
+
+    
+    const clearance = new Clearance ({ 
+        form: reqfrom,
+        dc:dcc,
+        seretaryDC : sdc,
+        assistanceTreasure : st,
+        library: lb,
+        networkAdmin: nt,
+        examCoordinator: ec,
+        programCoordinator: pc,
+        mainLibrary : ml,
+        hostelSuperintendent: hs,
+        studentAffairsCoordinator: sac,
+        date: dt,
+        //email:req.params.email
+
+
+        
+    }
+    );
+    clearance.save()
+    .then((result) => {
+    
+        res.send("request send");
+        
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+})
+
+
+
+
+app.get('/getclearancereq', (req,res) =>{
+    const myquery = { dc: false,
+        seretaryDC:false ,
+        assistanceTreasure : false,
+        library: false,
+        networkAdmin: false,
+        examCoordinator: false,
+        programCoordinator: false,
+        mainLibrary : false,
+        hostelSuperintendent: false,
+        studentAffairsCoordinator: false
+         }
+
+    Clearance.find(myquery, (err,result) => {
+        if(err)
+        console.log(err);
+        
+        res.send(result);
+    })
+})
+
+//delete request
+app.delete("/deleteClreanceReq/:id", (req, res) => {
+
+    try {
+      
+    
+        Clearance.findByIdAndRemove(req.params.id).exec();
+        //if( !mongoose.Types.ObjectId.isValid(id) ) return false;
+        res.send("request deleted");
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+
 // Imran backend Code end//

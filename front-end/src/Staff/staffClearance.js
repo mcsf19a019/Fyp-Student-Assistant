@@ -1,46 +1,51 @@
 //import { Button } from "react-bootstrap";
-import {Link} from "react-router-dom"
+//import {Link} from "react-router-dom"
 import StaffNavBar from './StaffNavBar';
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { useState } from "react";
+import  Axios  from "axios";
 const StaffClearance = () => {
     
-    const [clearnaceStatus,setclearnceStatus] = useState([
-        {name:'Anmian Khan',rollnbr:'MCSF19A026' ,appliaction:'Dear Sir/Madam , As I have completed my degree so, I want clearance from university.Thank You', id: 1},
-        {name:'Imran Munawar',rollnbr:'MCSF19A027' ,appliaction:'Dear Sir/Madam , As I have completed my degree so, I want clearance from university.Thank You', id: 2},
-        {name:'Zeeshan Faiz',rollnbr:'MCSF19A029' ,appliaction:'Dear Sir/Madam , As I have completed my degree so, I want clearance from university.Thank You', id: 3},
-        {name:'Shoaib Sabir',rollnbr:'MCSF19A017' ,appliaction:'Dear Sir/Madam , As I have completed my degree so, I want clearance from university.Thank You', id: 4}
-    ]) ;  
+    const [clearnaceStatus,setclearnceStatus] = useState([]) ;  
+    useEffect( () => {
+
+        Axios.get("http://localhost:3001/getclearancereq").then((response) => {
+          setclearnceStatus(response.data);
+          //console.log(response.data);
+
+        });
+
+    },[]);
+
+    const rejectClrearance = (id)  =>{
+        Axios.delete(`http://localhost:3001/deleteClreanceReq/${id}`);
+
+    }
 
     return(
         <div className="im-clearnce-status">
             <StaffNavBar/>
-            {clearnaceStatus.map((status)  =>(
+            <div>
+            {clearnaceStatus.map((val,key) => {
+        return(
+        
+          <div className="im-card" key={key}>
+              <br></br>
+              <h5> Name : Imran Munawar</h5>
+              <h5>RollNo: MCSF19A027 </h5>
+              <h6>{val.date}</h6>
+              <h6>{val.form}</h6>
+             
+          
+              <button type="submit" className="im-accept">Accept</button>
+              <button type="submit" className="im-reject" onClick={() => rejectClrearance(val._id)}>Reject</button>
+              <br></br>
+              <br></br>
 
-                <div className="im-card">
-                    <div className="im-studentsInfo">
-                    <h4>{status.name}</h4>
-                    <h4>{status.rollnbr}</h4>
-                    <h5>{status.appliaction}</h5>
-                    </div>
-                   
-
-                    <div className="im-clreance-buttons">
-                          <button   className="im-accept"> Accept</button>
-                          
-                          <button className="im-reject" >Reject</button>
-                    
-                          
-                          <br></br>
-                          <br></br>
-                    </div>
-
-                    
-                </div>
-
-                
-                
-            )) }
+          </div>
+        );
+      })}
+            </div>    
             
         </div>
     )

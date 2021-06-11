@@ -5,10 +5,10 @@ const ClearanceSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    email:{
+    /*email:{
         type: String,
         required : true
-    },
+    },*/
     dc:{
         type: Boolean,
         required: true
