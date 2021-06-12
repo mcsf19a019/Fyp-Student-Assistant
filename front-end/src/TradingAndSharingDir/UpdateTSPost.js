@@ -8,7 +8,6 @@ import Axios from 'axios';
 const UpdateTSPost = () => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
-  const [pic, setPic] = useState('');
   const { id } = useParams();
   let history = useHistory();
 
@@ -16,11 +15,10 @@ const UpdateTSPost = () => {
     Axios.get(`http://localhost:3001/getTsPost/${id}`).then((Response) =>{  
     setTitle(Response.data.title);
     setBody(Response.data.content);
-    setPic(Response.data.pic);
     })
   }, [])
   const Update = (id) => {
-    Axios.put("http://localhost:3001/updateTsPost", {id,title,body,pic});
+    Axios.put("http://localhost:3001/updateTsPost", {id,title,body});
     }
   return (  
       <div className="updatePost">
@@ -47,15 +45,6 @@ const UpdateTSPost = () => {
                 required 
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
-              />
-            </div>
-            <div className="register-inputs">
-              <label className="form-label"> Post Image</label>
-              <input className="forminputs"
-                type="file" 
-                required 
-                value={pic}
-                onChange={(e) => setPic(e.target.file[0])}
               />
             </div>
             <Link to="/TSPostList">

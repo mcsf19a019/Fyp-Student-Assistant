@@ -16,7 +16,7 @@ const NavBar = () => {
        
         </a>
         <div className="appName-navbar">
-        <h3 >Student Assistant</h3>
+        
 
         </div>    
       </nav>

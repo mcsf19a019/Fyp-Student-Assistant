@@ -25,7 +25,7 @@ const StaffNoticeBoard = () => {
       </div>
       <h3>Notices:</h3>
         <div className="outer"> 
-        <NoticeList notices={noticeList} user={"admin"}/>
+        <NoticeList notices={noticeList}user={"admin"}/>
         </div>
        
         </div>

@@ -8,7 +8,6 @@ import Axios from 'axios';
 const UpdateTEPost = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
-    const [pic, setPic] = useState('');
     const { id } = useParams();
     let history = useHistory();
 
@@ -16,11 +15,10 @@ const UpdateTEPost = () => {
       Axios.get(`http://localhost:3001/getTePost/${id}`).then((Response) =>{  
       setTitle(Response.data.title);
       setBody(Response.data.content);
-      setPic(Response.data.pic);
       })
     }, [])
     const Update = (id) => {
-      Axios.put("http://localhost:3001/updateTePost", {id,title,body,pic});
+      Axios.put("http://localhost:3001/updateTePost", {id,title,body});
       }
 
     return (  
@@ -48,15 +46,6 @@ const UpdateTEPost = () => {
                   required 
                   value={body}
                   onChange={(e) => setBody(e.target.value)}
-                />
-              </div>
-              <div className="register-inputs">
-                <label className="form-label"> Post Image</label>
-                <input className="forminputs"
-                  type="file" 
-                  required 
-                  value={pic}
-                  onChange={(e) => setPic(e.target.file[0])}
                 />
               </div>
               <Link to="/TEPostList">

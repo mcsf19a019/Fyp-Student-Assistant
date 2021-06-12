@@ -10,7 +10,6 @@ const TSPostDetails = () => {
   const [author, setAuthor] = useState('');
   const [body, setBody] = useState('');
   const [date,setDate] = useState('');
-  const [pic,setPic] = useState('');
   const { id, user } = useParams();
 
   useEffect(() => {
@@ -19,7 +18,6 @@ const TSPostDetails = () => {
     setBody(Response.data.content);
     setAuthor(Response.data.author);
     setDate(Response.data.date);
-    setPic(Response.data.pic);
     })
   }, [])
   const checkUsr = (user) =>{
@@ -49,7 +47,6 @@ const TSPostDetails = () => {
         <br/>
         <h5 className="posts_detailPosts_body">{body}</h5>
         <br/>
-        <h5>{pic}</h5>
         <br/>
         <h5 className="posts_detailPosts_author">Posted by: {author.toUpperCase()}</h5>
         <br/>

@@ -16,6 +16,7 @@ import Registerform from './RegistrationDir/Registerform';
 import Firstpage from './RegistrationDir/Firstpage';
 import ForgotPassword from './RegistrationDir/ForgotPassword';
 import HomePage from './RegistrationDir/HomePage';
+import Logout from './RegistrationDir/logout';
 //imran imports
 import Clearance from './ClearanceDir/Clearnce';
 import StaffClear from './Staff/staffClearance';
@@ -62,7 +63,7 @@ import HomeAdminHandleUser from './Admin/HomeAdminHandleUser';
 import AdminUserCreate from './Admin/AdminUserCreate';
 import AdminUserEdit from './Admin/AdminUserEdit';
 import AdminUserDelete from './Admin/AdminUserDelete';
-
+import AdminUserList from './Admin/AdminUserList';
 function App() {
   return (
     <Router>
@@ -96,6 +97,9 @@ function App() {
           <Route exact path="/register">
             <Registerform />
           </Route>
+          <Route path="/logout">
+            <Logout/>
+            </Route>
 
           {/* Shoaib routes */}
           <Route path="/notice-board">
@@ -254,6 +258,9 @@ function App() {
             </div>
             <AdminUserCreate />
           </Route>
+
+          
+          
         </Switch>
       </div>
     </Router>

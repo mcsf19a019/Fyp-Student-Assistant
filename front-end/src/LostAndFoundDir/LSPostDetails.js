@@ -10,7 +10,6 @@ const LSPostDetails = () => {
   const [author, setAuthor] = useState('');
   const [body, setBody] = useState('');
   const [date,setDate] = useState('');
-  const [pic,setPic] = useState('');
   const { id, user } = useParams();
 
   useEffect(() => {
@@ -18,7 +17,6 @@ const LSPostDetails = () => {
     setTitle(Response.data.title);
     setBody(Response.data.content);
     setDate(Response.data.date);
-    setPic(Response.data.pic);
     })
   }, [])
   const checkUsr = (user) =>{
@@ -48,7 +46,6 @@ const LSPostDetails = () => {
         <br/>
         <h5 className="posts_detailPosts_body">{body}</h5>
         <br/>
-        <h5>{pic}</h5>
         <br/>
         <h5 className="posts_detailPosts_author">Posted by: {author.toUpperCase()}</h5>
         <br/>

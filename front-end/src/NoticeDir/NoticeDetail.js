@@ -16,6 +16,10 @@ const NoticeDetail = () => {
         setBody(Response.data.content);
         setDate(Response.data.date);
         })
+
+        
+
+
       }, [])
       const checkUsr = (user) =>{
           if(user == "admin"){

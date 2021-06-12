@@ -9,9 +9,7 @@ const TsPostsSchema = new mongoose.Schema({
         type: String,
         required : true
     },
-    pic:{
-        type: String,
-    },
+  
     status:{
         type: Boolean,
         default: false

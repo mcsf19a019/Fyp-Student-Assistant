@@ -25,7 +25,7 @@ const NavbarHome = () => {
               <Link to="/HomeTradingSharing" alt="SELL AND BUY">TRADING & SHARING</Link>
               <Link to="/HomeTripsEvents" alt="TRIPS AND EVENTTS">TRIPS AND EVENTS</Link>
               <Link to="/clearance" alt="CELERANCE">CLEARANCE</Link>
-              <Link to="#" alt="Logout">LOGOUT</Link>
+              <Link to="/logout" alt="Logout">LOGOUT</Link>
           </div>
               
             </div>

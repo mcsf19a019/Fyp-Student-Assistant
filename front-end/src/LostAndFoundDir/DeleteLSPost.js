@@ -9,7 +9,6 @@ const DeleteLSPost = () => {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [body, setBody] = useState('');
-    const [pic, setPic] = useState('');
   let history = useHistory();
 
   useEffect(() => {
@@ -17,7 +16,6 @@ const DeleteLSPost = () => {
     setTitle(Response.data.title);
     setBody(Response.data.content);
     setAuthor(Response.data.author);
-    setPic(Response.data.pic);
     })
   }, [])
 
@@ -36,7 +34,6 @@ const DeleteLSPost = () => {
               <h3 className="posts_detailPosts_title">{title.toUpperCase()}</h3>
               <br/>
               <h5 className="posts_detailPosts_body">{body}</h5>
-              <h5>{pic}</h5>
               <br/>
               <h6 className="posts_detailPosts_author">{author.toUpperCase()}</h6>
               <br/>

@@ -14,7 +14,7 @@ const StaffNavBar = () => {
             <div className="navHome">
               <Link to="/StaffHome" alt="NOTICE-BOARD" >Notice-Board</Link>
               <Link to="/StaffClearance" alt="CLEARANCE">Clearance</Link>
-              <Link to="#" alt="LOGOUT">Logout</Link>
+              <Link to="/logout" alt="LOGOUT">Logout</Link>
             </div>
           </div>
         </nav>

@@ -6,11 +6,14 @@ import Axios from 'axios';
 
 const NoticeBoard = () => {
     const [notices, setnotice] = useState([]);
+    const [important, setImportant] = useState([]);
     useEffect(() => {
       Axios.get("http://localhost:3001/getNotices").then((Response) =>{  
         setnotice(Response.data);
       })
-      
+      Axios.get("http://localhost:3001/getSLfPosts").then((Response) =>{  
+        setImportant(Response.data);
+      })
     }, [])
     return (  
         <div className="noticeboard">
@@ -27,7 +30,7 @@ const NoticeBoard = () => {
         <div className="outer"> 
         <NoticeList notices={notices} user={"student"}/>
         </div>
-        <Importants className="outer 2"/>
+        <Importants important={important} user={"student"}className="outer 2"/>
         </div>
     </div>
     );

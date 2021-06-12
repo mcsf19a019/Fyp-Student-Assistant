@@ -17,9 +17,9 @@ const SHNavBarAdmin = () => {
 
                     <ul className="navbar-nav" >
                         <li className="nav-item"><Link to="/admin" className="nav-link">NOTICES</Link></li>
-                        <li className="nav-item"><Link to="/adminUserlists" className="nav-link">USERS</Link></li>
+                        <li className="nav-item"><Link to="/HomeAdminHandleUser" className="nav-link">USERS</Link></li>
                         <li className="nav-item"><Link to="/tspostListAdmin" className="nav-link">POSTS</Link></li>
-                        <li className="nav-item"><Link to="/LOGOUT" className="nav-link">LOGOUT</Link></li>
+                        <li className="nav-item"><Link to="/logout" className="nav-link">LOGOUT</Link></li>
 
                         {/*  <li className="nav-item"><a href="#" className="nav-link">USERS</a></li>
                         <li className="nav-item"><a href="#" className="nav-link">POSTS</a></li>

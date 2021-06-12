@@ -6,13 +6,16 @@ const LfPosts = require('./models/LfPosts');
 const TsPosts = require('./models/TsPosts');
 const TePosts = require('./models/TePosts');
 const Notices = require('./models/Notices');
+const jwt = require('jsonwebtoken');
+const CookieParser = require('cookie-parser');
+//const authRoutes = require('./routes/authRoutes');
 const cors = require('cors');
 const app = express();
 
 
 app.use(express.json()); //converting all data into json which recieves from frontend
 app.use(cors());
-
+app.use(CookieParser());
 const dbString = 'mongodb+srv://shoaib:Desperados1@cluster019.s7jlw.mongodb.net/Student-Assistant?retryWrites=true&w=majority';
 mongoose.connect(dbString, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((result) => {
@@ -28,7 +31,6 @@ app.post('/insertLfPosts', (req, res) => {
     const LfPost = new LfPosts({
         title: req.body.title,
         content: req.body.body,
-        pic:req.body.pic,
         date: dt
     }
     );
@@ -47,7 +49,6 @@ app.post('/insertTsPosts', (req, res) => {
     const TsPost = new TsPosts({
         title: req.body.title,
         content: req.body.body,
-        pic:req.body.pic,
         date: dt
     }
     );
@@ -66,7 +67,6 @@ app.post('/insertTePosts', (req, res) => {
     const TePost = new TePosts({
         title: req.body.title,
         content: req.body.body,
-        pic:req.body.pic,
         date: dt
     }
     );
@@ -273,23 +273,117 @@ app.get('/getNotice/:id', (req,res) =>{
 
 // Sehar backend Code start//
 
+
+
+const handleErrors = (err) => {
+    console.log(err.message, err.code);
+    let errors = { email: '', password: '' };
+
+    //wrong doamin error
+    if(err == "false")
+    {
+        errors.email = 'You are not PUCIT Student';
+      return errors;
+    }
+  
+    // duplicate email error
+    if (err.code === 11000) {
+      errors.email = 'that email is already registered';
+      return errors;
+    }
+  // incorrect email
+  if (err.message === 'incorrect email') {
+    errors.email = 'That email is not registered';
+  }
+
+  // incorrect password
+  if (err.message === 'incorrect password') {
+    errors.password = 'That password is incorrect';
+  }
+    // validation errors
+    if (err.message.includes('user validation failed')) {
+    
+      Object.values(err.errors).forEach(({ properties }) => {
+        errors[properties.path] = properties.message;
+      });
+    }
+
+  
+    return errors;
+  }
+
+
 app.post("/register",async(req,res)=>
 {
     const name=req.body.name;
     const email=req.body.email;
     const password=req.body.password;
     const confirmPass=req.body.confirmPass;
-    const studentType=req.body.studentType;
-    const user=new User ({email:email,name:name,password:password,confirmPassword:confirmPass,userType:studentType});
-    try{
-        await user.save();
-    }catch(err)
+    const userType= req.body.userType;
+    const user=new User ({email:email,name:name,password:password,confirmPassword:confirmPass,userType:userType});
+    const domain = email.includes("@pucit.edu.pk");
+    const Bcheck =email.includes("b",0);
+    if(domain && Bcheck)
     {
-        console.log(err);
+      console.log("true");
+      try
+      {
+      const user=await User.create({email,password,name,userType});
+     res.send("true");
+      await user.save();
+      }
+      catch(err)
+      {
+          const errors=handleErrors(err);
+          res.json({errors});
+          console.log(err);
+      }
     }
+    else{
+        //console.log("false");
+        //res.send("false");
+        const errors=handleErrors("false");
+        res.json({errors});
+      }
+    
 });
 
+const maxAge = 3 * 24 * 60 * 60;
+const createToken = (id) => {
+  return jwt.sign({ id }, 'studentAssistantProject', {
+    expiresIn: maxAge
+  });
+};
+app.post("/userLogin",async (req,res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    try {
+        const user = await User.login(email, password);
+        const token = createToken(user._id);
+        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+        if(user.userType == "student"){
+            res.json({ user: user._id, usertype: "student" });
+            whichUsr = user._id;
+        }
+        else if(user.userType == "Staff"){
+            res.json({ user: user._id, usertype: "Staff" });
+            whichUsr = user._id;
+        }
+        else if(user.userType == "Admin"){
+            res.json({ user: user._id, usertype: "Admin" });
+            whichUsr = user._id;
+        }
+      } catch (err) {
+        const errors = handleErrors(err);
+        res.json({ errors });
+      }
+})
 
+app.get("/logout" ,(req,res) =>{
+    //res.cookie('jwt','',{maxAge :1});
+    whichUsr = "";
+    res.send("done");
+})
 // Sehar backend Code end//
 
 // Ameena backend Code start//

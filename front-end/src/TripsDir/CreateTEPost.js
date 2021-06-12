@@ -8,11 +8,10 @@ const CreateTEPost = () => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [author, setAuthor] = useState('');
-  const [pic, setPic] = useState('');
   let history = useHistory();
 
   const handleSubmit = (e) => {
-    Axios.post("http://localhost:3001/insertTePosts", {title, body, author, pic});
+    Axios.post("http://localhost:3001/insertTePosts", {title, body, author});
     //history.push("/HomeTripsEvents");
   }
 
@@ -40,14 +39,6 @@ const CreateTEPost = () => {
               required 
               value={body}
               onChange={(e) => setBody(e.target.value)}
-            />
-          </div>
-          <div className="register-inputs">
-            <label className="form-label"> Post Image </label>
-            <input className="forminputs"
-              type="file"
-              value={pic}
-              onChange={(e) => setPic(e.target.file[0])}
             />
           </div>
             <button type='submit'>

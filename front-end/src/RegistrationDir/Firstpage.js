@@ -3,6 +3,7 @@ import Navbar from './NavBar';
 
 const Firstpage = () => {
     return (
+        <div className= "bg-pic">
             <div className="body"> 
         <div className="first-page" style={{
         }}>
@@ -15,7 +16,7 @@ const Firstpage = () => {
         
 
         <div className="link" style={{
-            textAlign:"right"
+            textAlign:"center"
         }}>
             
         <Link to="/register">
@@ -30,7 +31,8 @@ const Firstpage = () => {
         </Link>
         <Link to="/login">
             <button className="Signup-butn"style={{ 
-                width:"200px"
+                width:"200px",
+                margin:"30px"
             }}>
                 Login
             </button>
@@ -55,7 +57,7 @@ const Firstpage = () => {
         </div>
         </div>
         </div>
-       
+        </div>
      );
 }
  

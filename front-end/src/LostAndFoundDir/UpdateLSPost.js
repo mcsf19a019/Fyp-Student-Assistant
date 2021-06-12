@@ -8,7 +8,6 @@ import Axios from 'axios';
 const UpdateLSPost = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
-    const [pic, setPic] = useState('');
     const { id } = useParams();
     let history = useHistory();
 
@@ -16,12 +15,11 @@ const UpdateLSPost = () => {
       Axios.get(`http://localhost:3001/getLfPost/${id}`).then((Response) =>{  
       setTitle(Response.data.title);
       setBody(Response.data.content);
-      setPic(Response.data.pic);
       })
     }, [])
 
     const Update = (id) => {
-      Axios.put("http://localhost:3001/updateLfPost", {id,title,body,pic});
+      Axios.put("http://localhost:3001/updateLfPost", {id,title,body});
       }
     return (  
         <div className="updatePost">
@@ -48,15 +46,6 @@ const UpdateLSPost = () => {
                   required 
                   value={body}
                   onChange={(e) => setBody(e.target.value)}
-                />
-              </div>
-              <div className="register-inputs">
-                <label className="form-label"> Post Image</label>
-                <input className="forminputs"
-                  type="file" 
-                  required 
-                  value={pic}
-                  onChange={(e) => setPic(e.target.file[0])}
                 />
               </div>
               <Link to="/LSPostList">

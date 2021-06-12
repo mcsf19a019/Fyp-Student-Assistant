@@ -233,7 +233,13 @@
                                       body {
                                         font-family: sans-serif;
                                       }
-
+                                    
+                                      .error{
+                                        color: #ff0099;
+                                        margin: 10px 2px;
+                                        font-size: 0.8em;
+                                        font-weight: bold;
+                                      }
                                       .navbar {
                                         background-color: #2F9DCF;
                                         position: fixed;
@@ -250,8 +256,9 @@
 
                                       .navHome a {
                                         text-decoration: none;
-                                        color: blanchedalmond;
+                                        color: white;
                                       }
+
 
                                       .appName-navbar {
                                         font-style: italic;
@@ -369,7 +376,7 @@
                                       .form1 {
                                         background-color: #FFFFFF;
                                         width: 570px;
-                                        height: 750px;
+                                        height: 820px;
                                         margin: 3em auto;
                                         border-radius: 1.5em;
                                         box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
@@ -393,24 +400,27 @@
                                       }
 
                                       /*first page */
+                                      .bg-pic{
+                                        background-image: url("https://thumbs.dreamstime.com/z/student-support-services-word-cloud-student-support-services-word-cloud-wordcloud-made-text-132814497.jpg");
+                                      }
 
                                       .first-page {
-                                        background-image: url("893529.jpg");
+                                     
                                         background-size: 650px 723px;
                                         background-repeat: no-repeat;
                                         background-size: initial;
                                         background-color: rgba(255, 255, 255, 0.952);
-                                      }
+                                      } 
 
                                       .first-page h1 {
                                         padding-top: 75px;
-                                        text-align: right;
+                                        text-align: center;
                                         color: #8C55AA;
                                         font-family: "Quicksand";
                                         font-weight: bold;
-                                        font-size: 50px;
+                                        font-size: 45px;
                                         padding-bottom: 50px;
-                                        margin-left: 60%;
+                                        margin-left: 0%;
                                       }
 
                                       /* /// imran css /// */

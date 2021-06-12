@@ -9,26 +9,65 @@ const Registerform = () => {
     const [email, SetEmail] = useState('');
     const [password, SetPassword] = useState('');
     const [confirmPass, SetconfirmPass] = useState('');
-    const[studentType,setStudentType]=useState('student');
+    const[userType,setUserType]=useState('student');
+    const[error,setError]=useState('');
+    const [emailErr, setemailErr] = useState('');
+    const [passErr, setpassErr] = useState('');
+    const [reqField, setReqField] = useState('');
     let history = useHistory();
 
-    const AddUserToDb=()=>{
-        Axios.post("http://localhost:3001/register",
+    const AddUserToDb=(e)=>{
+        e.preventDefault();
+        setUserType("student");
+        setError("");
+        setemailErr("");
+        setpassErr("");
+        setReqField("");
+        if(name == "" || email == "" || password == "" || confirmPass =="")
         {
-            name,email,password,confirmPass,studentType
-        });
-        history.push("/login");
+            setReqField("Required Field");
+        }
+        else if(password.length < 8 || confirmPass.length < 8)
+        {
+            setError("minimum password length is 8");
+        }
+        else if(password==confirmPass)
+        {
+            Axios.post("http://localhost:3001/register",
+          {
+            name,email,password,confirmPass,userType
+           
+          }).then((Response)=>{
+          if(Response.data ==  true)
+          {
+              history.push("/login");
+          }
+          if(Response.data.errors != null)
+            {
+            setemailErr(Response.data.errors.email);
+            setpassErr(Response.data.errors.password);
+            }
+          });
+
+        }
+        else
+        {
+            
+            setError("Password not Matched");
+        }
     };
 
     return (
 
         <div className="form-content">
             <Navbar />
-            <form onSubmit={AddUserToDb}className="form1">
+            <form className="form1">
                 <div className="form-headings">
                     <h2>Let's get started today!</h2>
                 </div>
-
+                <div className="error">
+                {reqField}
+                </div>
                  <div className="register-inputs"> 
                     <label className="form-label">Name</label>
                     <input className="forminputs"
@@ -41,7 +80,9 @@ const Registerform = () => {
                         }}
                     ></input>
                 </div>
-
+                <div className="error">
+                        {emailErr}
+                    </div>
                 <div className="register-inputs">
                     <label className="form-label">Email</label>
                     <input className="forminputs"
@@ -54,6 +95,11 @@ const Registerform = () => {
                         }}
                     ></input>
                 </div>
+                <div className="error">
+                { passErr}
+                {error}    
+               </div>
+
 
                 <div className="register-inputs">
                     <label className="form-label">Password</label>
@@ -82,13 +128,9 @@ const Registerform = () => {
                         }}
                     ></input>
                 </div>
-
-                {/* <Link to="/login"> */}
-                    <button className='Signup-butn' >
-
+                    <button onClick={(e) =>AddUserToDb(e)} className='Signup-butn' >
                         Sign Up
                     </button>
-                {/* </Link> */}
                 <span className='form-input-login'>
                     <h5>Already have an account? Login</h5>
                     <Link to="/login"> here </Link>
