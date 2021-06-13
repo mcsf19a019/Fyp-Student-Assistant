@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 
 const TSPostListAdmin = () => {
     const [posts,setposts]=useState([]);
-    const [status,setstatus]=useState(Boolean);
     let history = useHistory();
     useEffect(() => {
         Axios.get("http://localhost:3001/getTsPosts").then((Response) =>{  

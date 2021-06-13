@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NavBarHome from '../RegistrationDir/NavbarHome';
 import { useHistory } from "react-router-dom";
 import TEMiniNavBar from './TEMiniNavbar';
@@ -10,9 +10,15 @@ const CreateTEPost = () => {
   const [author, setAuthor] = useState('');
   let history = useHistory();
 
+  useEffect( () => {
+    Axios.get("http://localhost:3001/getUserInfo").then((Response) => {
+          setAuthor(Response.data.email);
+        });
+  },[]);
+
   const handleSubmit = (e) => {
     Axios.post("http://localhost:3001/insertTePosts", {title, body, author});
-    //history.push("/HomeTripsEvents");
+    history.push("/HomeTripsEvents");
   }
 
   return (
@@ -40,6 +46,14 @@ const CreateTEPost = () => {
               value={body}
               onChange={(e) => setBody(e.target.value)}
             />
+          </div>
+          <div className="register-inputs">
+            <label className="form-label">Post By:</label>
+            <input className="forminputs"
+              type="text" 
+              required
+              onChange={(e) => setAuthor(e.target.value)} 
+              readOnly value={author}/>
           </div>
             <button type='submit'>
               Add Post

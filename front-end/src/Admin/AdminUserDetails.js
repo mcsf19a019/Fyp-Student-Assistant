@@ -20,8 +20,11 @@ const AdminUserDetails = () => {
     }, [])
 
   return (  
-    <div className="notiveDetails">
+    <div>
+      <h3 className="ss_heading">Detail of User</h3>
       <br/>
+      <br/>
+      <div  className="notiveDetails">
         <div className="ss_detailNoticeBox">
           <h3 className="ss_detailNoticeBox_body">Name: {name.toUpperCase()}</h3>
           <br/>
@@ -30,6 +33,7 @@ const AdminUserDetails = () => {
           <h4 className="ss_detailNoticeBox_body">Password: {password}</h4>
           <br/>
           <h4 className="ss_detailNoticeBox_body">User Type: {userType}</h4>
+        </div>
       </div> 
     </div>
   );

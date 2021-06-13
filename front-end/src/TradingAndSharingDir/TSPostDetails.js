@@ -37,20 +37,23 @@ const TSPostDetails = () => {
       }          
   }
   return (
-    <div className="post-details">
-      <div className="">
+    <div>
+      <NavBarHome/>
+      <TSMiniNavBar title={"Trading & Sharing"}/>
+      {/* <div className="">
           {checkUsr(user)}
-      </div>
-      <br/>
-      <div className="posts_detailPosts">
-        <h3 className="posts_detailPosts_title">{title.toUpperCase()}</h3>
-        <br/>
-        <h5 className="posts_detailPosts_body">{body}</h5>
-        <br/>
-        <br/>
-        <h5 className="posts_detailPosts_author">Posted by: {author.toUpperCase()}</h5>
-        <br/>
-        <h6 className="posts_detailPosts_date"><b className="posts_date">Publish Date:</b> {date}</h6>
+      </div> */}
+      <br/> 
+      <div className="post-details">
+        <div className="posts_detailPosts">
+          <h3 className="posts_detailPosts_title">{title.toUpperCase()}</h3>
+          <br/>
+          <h5 className="posts_detailPosts_body">{body}</h5>
+          <br/>
+          <br/>
+          <br/>
+          <h6 className="posts_detailPosts_date"><b className="posts_date">Publish Date:</b> {date}</h6>
+        </div>
       </div>
     </div>
   );

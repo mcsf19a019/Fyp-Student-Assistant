@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import AdminUserCreate from './AdminUserCreate';
 
-const AdminUserList = ({ User, title, user }) => { 
+const AdminUserList = ({ User, title }) => { 
 
   return (
     <div className="post-list">
@@ -17,9 +17,9 @@ const AdminUserList = ({ User, title, user }) => {
       </nav>
 
 
-      {User.map(user => (
+      {User.map(user => ( 
         <div className="user-preview" key={user._id} >
-         <Link to={`/user/${user._id}/${user}`}><h2>{ user.email }</h2>
+         <Link to={`/user/${user._id}`}><h2>{ user.email }</h2>
          </Link> 
           <Link to={`/updateUser/${user._id}`}>
           <button className="SH-Admin-Noticebtn" >Edit</button>

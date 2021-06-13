@@ -88,7 +88,17 @@ app.post('/insertTePosts', (req, res) => {
     console.log(err);
                 
       res.send(result);
-     })
+     }).sort({"date":-1})
+    })
+  
+    // getting specific post from db
+  app.get('/getLfPost/:id', (req,res) =>{
+      LfPosts.findById(req.params.id, (err,result) =>{
+          if(err)
+          console.log(err);
+          else
+          res.send(result);
+      })
   })
     //getting approved posts
 app.get('/getSLfPosts', (req,res) =>{
@@ -97,14 +107,13 @@ app.get('/getSLfPosts', (req,res) =>{
     console.log(err);
                       
     res.send(result);
-   })
+   }).sort({"date":-1})
  })
   //updating status
   app.put("/updateLfposts", async (req, res) => {
     try {
         LfPosts.findById(req.body.id, (err,updatedStatus) => {
             updatedStatus.status = true;
-            console.log(updatedStatus.status);
             updatedStatus.save();
             res.send("updateStatus");
 
@@ -125,12 +134,12 @@ app.delete("/deleteLfposts/:id",async(req,res)=>{
                                                         //Admin Trips and events                        
  app.get('/getTePosts', (req,res) =>{
 
-    TePosts.find({}, (err,result) => {
+    TePosts.find({status:"false"}, (err,result) => {
     if(err)
       console.log(err);
                   
         res.send(result);
-       })
+       }).sort({"date":-1})
     })
       //getting approved posts
   app.get('/getSTePosts', (req,res) =>{
@@ -139,8 +148,17 @@ app.delete("/deleteLfposts/:id",async(req,res)=>{
       console.log(err);
                         
       res.send(result);
-     })
+     }).sort({"date":-1})
    })
+   // getting specific post from db
+   app.get('/getTePost/:id', (req,res) =>{
+    TePosts.findById(req.params.id, (err,result) =>{
+        if(err)
+        console.log(err);
+        else
+        res.send(result);
+        })
+    })
     //updating status
     app.put("/updateTeposts", async (req, res) => {
       try {
@@ -168,12 +186,12 @@ app.delete("/deleteLfposts/:id",async(req,res)=>{
 
  app.get('/getTsPosts', (req,res) =>{
 
-    TsPosts.find({}, (err,result) => {
+    TsPosts.find({status:"false"}, (err,result) => {
     if(err)
       console.log(err);
                   
         res.send(result);
-       })
+       }).sort({"date":-1})
     })
       //getting approved posts
   app.get('/getSTsPosts', (req,res) =>{
@@ -182,8 +200,17 @@ app.delete("/deleteLfposts/:id",async(req,res)=>{
       console.log(err);
                         
       res.send(result);
-     })
+     }).sort({"date":-1})
    })
+    // getting specific post from db
+    app.get('/getTsPost/:id', (req,res) =>{
+        TsPosts.findById(req.params.id, (err,result) =>{
+            if(err)
+            console.log(err);
+            else
+            res.send(result);
+        })
+    })
     //updating status
     app.put("/updateTsposts", async (req, res) => {
       try {
@@ -772,7 +799,7 @@ app.put("/updateReq/:id" ,(req,res) =>{
         console.log(err);
     }
 })
-
+ 
 app.get("/getUserInfo" ,(req,res) =>{
     User.findById(whichUsr, (err,result) =>{
         if(err)

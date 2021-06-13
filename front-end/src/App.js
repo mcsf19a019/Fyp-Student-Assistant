@@ -63,7 +63,8 @@ import HomeAdminHandleUser from './Admin/HomeAdminHandleUser';
 import AdminUserCreate from './Admin/AdminUserCreate';
 import AdminUserEdit from './Admin/AdminUserEdit';
 import AdminUserDelete from './Admin/AdminUserDelete';
-import AdminUserList from './Admin/AdminUserList';
+import AdminUserDetails from './Admin/AdminUserDetails';
+
 function App() {
   return (
     <Router>
@@ -136,7 +137,7 @@ function App() {
           <Route path="/HomeLostFound">
             <HomeLostFound />
           </Route>
-          <Route path="/lfblogs/:id/:user">
+          <Route path="/lfblogs/:id">
             <LSPostDetails />
           </Route>
           <Route path="/delete/:id">
@@ -153,7 +154,7 @@ function App() {
           <Route path="/CreateTSPost">
             <CreateTSPost />
           </Route>
-          <Route path="/tsblogs/:id/:user">
+          <Route path="/tsblogs/:id">
             <TSPostDetails />
           </Route>
           <Route path="/HomeTradingSharing">
@@ -244,6 +245,13 @@ function App() {
             <HomeAdminHandleUser />
           </Route>
 
+          <Route path="/user/:id">
+            <div className="Navbar">
+              <SHNavBarAdmin></SHNavBarAdmin>
+            </div>
+            <AdminUserDetails />
+          </Route>
+
           <Route path="/updateUser/:id">
             <AdminUserEdit />
           </Route>
@@ -259,8 +267,6 @@ function App() {
             <AdminUserCreate />
           </Route>
 
-          
-          
         </Switch>
       </div>
     </Router>
