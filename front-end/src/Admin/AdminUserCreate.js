@@ -71,7 +71,7 @@ const Create = () => {
             onChange={(event) => {
               setUserType(event.target.value)
           }}>
-            <option value="Student">Student</option>
+            <option value="Student">student</option>
             <option value="Staff">Staff</option>
             <option value="Admin">Admin</option>
           </select>

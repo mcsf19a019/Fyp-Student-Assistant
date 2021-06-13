@@ -1,6 +1,7 @@
 import NavBarHome from '../RegistrationDir/NavbarHome';
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Axios from "axios";
+
 
 const Clearnce = () => {
     const[application, setApplication]=useState("Write your clearance application here");
@@ -14,26 +15,75 @@ const Clearnce = () => {
     const[MainLibray, setMainLibray]=useState(false);
     const[HostelSuperintendent, setHostelSuperintendent]=useState(false);
     const[StudentAffairsCoordinator, setStudentAffairsCoordinator]=useState(false);
+    const[email, setemail]=useState("");
+    const[UserName, setUserName]=useState("");
+    const[error, setError]=useState("");
+
     
 
 
-    const sendthereq=() =>{
-        Axios.post("http://localhost:3001/insertclearancereq",{
-            
-        application,    
-        DCClearance,
-        SecretaryDCClearance,
-        AssistanceTreasurer,
-        Library,
-        NetworkAdmin,
-        ExamCoordinator,
-        ProgramCoordinator,
-        MainLibray,
-        HostelSuperintendent,
-        StudentAffairsCoordinator
+    useEffect( () => {
+        Axios.get("http://localhost:3001/getUserInfo").then((Response) => {
+            // console.log(Response.data); 
+             setUserName(Response.data.name);
+              setemail(Response.data.email);
+              //console.log(Response.data.email);
+    
+            });
 
         
+          ///get clreance status
+        Axios.get("http://localhost:3001/getclearancestatus").then((Response) => {
+            setDCClearance(Response.data[0].dc);
+            setSecretaryDCClearance(Response.data[0].seretaryDC);
+            setAssistanceTreasurer(Response.data[0].assistanceTreasure);
+             setLibrary(Response.data[0].library);
+             setNetworkAdmin(Response.data[0].networkAdmin);
+             setExamCoordinator(Response.data[0].examCoordinator);
+             setProgramCoordinator(Response.data[0].programCoordinator);
+             setMainLibray(Response.data[0].mainLibrary);
+             setHostelSuperintendent(Response.data[0].hostelSuperintendent);
+             setStudentAffairsCoordinator(Response.data[0].studentAffairsCoordinator);
+
+           
+            
+        //    console.log(Response.data);
+        //    console.log(Response.data[0].dc);
+           
+
+          });
+
+    },[]);
+    
+
+
+    const sendthereq=(e) =>{
+        e.preventDefault();
+        Axios.get("http://localhost:3001/usrCheckForReq").then((Response) => {
+        if(Response.data == "")
+        {
+            Axios.post("http://localhost:3001/insertclearancereq",{
+            
+                application,
+                email,
+                UserName,    
+                DCClearance,
+                SecretaryDCClearance,
+                AssistanceTreasurer,
+                Library,
+                NetworkAdmin,
+                ExamCoordinator,
+                ProgramCoordinator,
+                MainLibray,
+                HostelSuperintendent,
+                StudentAffairsCoordinator
+                });
+        }
+        else {
+            setError("your request already submitted");
+        }
         });
+        
 
     };
 
@@ -46,12 +96,13 @@ const Clearnce = () => {
                 <form>
                 <div className="c1" id="body"> 
 
-                  <textarea rows="13" cols="100" classname="textarea1" required placeholder={application} onChange={(e) => setApplication(e.target.value)}></textarea>
+                  <textarea rows="13" cols="100" className="textarea1" required placeholder={application} onChange={(e) => setApplication(e.target.value)}></textarea>
                   </div>
                   <div className="c2" id="submit">
-                      <button className="B1" type="submit" onClick={sendthereq}>Submit</button>
+                      <button className="B1" type="submit" onClick={(e) =>sendthereq(e)}>Submit</button>
                       <br></br>
                   </div>
+                  <div className="error">{error}</div>
 
                   <div className="status">
                       <br></br>

@@ -21,6 +21,7 @@ mongoose.connect(dbString, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((result) => {
         console.log("db is connected");
         app.listen(3001);
+        let whichUsr;
 
     })
     .catch((err) => console.log(err));
@@ -297,7 +298,7 @@ const handleErrors = (err) => {
   }
 
   // incorrect password
-  if (err.message === 'incorrect password') {
+  if (err.message === 'incorrectt password') {
     errors.password = 'That password is incorrect';
   }
     // validation errors
@@ -356,7 +357,7 @@ const createToken = (id) => {
 };
 app.post("/userLogin",async (req,res) => {
     const email = req.body.email;
-    const password = req.body.password;
+    const password = req.body.password;;
     try {
         const user = await User.login(email, password);
         const token = createToken(user._id);
@@ -467,13 +468,14 @@ app.post('/insertclearancereq', (req, res) => {
     const hs= req.body.HostelSuperintendent;
     const sac= req.body.StudentAffairsCoordinator;
     const dt= new Date();
-   
-    
-
+    const nam= req.body.UserName;
+    const mail=req.body.email;
     
     const clearance = new Clearance ({ 
         form: reqfrom,
-        dc:dcc,
+        email: mail,
+        name: nam,
+        dc: dcc,
         seretaryDC : sdc,
         assistanceTreasure : st,
         library: lb,
@@ -502,8 +504,7 @@ app.post('/insertclearancereq', (req, res) => {
 })
 
 
-
-
+/*
 app.get('/getclearancereq', (req,res) =>{
     const myquery = { dc: false,
         seretaryDC:false ,
@@ -523,6 +524,146 @@ app.get('/getclearancereq', (req,res) =>{
         
         res.send(result);
     })
+})*/
+
+app.get('/getclearancereq', (req,res) =>{
+    
+    User.findById(whichUsr, (err,result) =>{
+        if(err)
+        console.log(err);
+        else{
+            if(result.email == "examcoordinator@staff.edu.pk")
+            {
+                const myquery = {
+                    examCoordinator: false
+                     }
+                     Clearance.find(myquery, (err,result) => {
+                        if(err)
+                        console.log(err);
+                        
+                        res.send(result);
+                    })
+
+            }
+            else if(result.email == "library@staff.edu.pk")
+            {
+                const myquery = {
+                    library: false
+                     }
+                     Clearance.find(myquery, (err,result) => {
+                        if(err)
+                        console.log(err);
+                        
+                        res.send(result);
+                    })
+
+            }
+            else if(result.email == "dc@staff.edu.pk")
+            {
+                const myquery = {
+                    dc: false
+                     }
+                     Clearance.find(myquery, (err,result) => {
+                        if(err)
+                        console.log(err);
+                        
+                        res.send(result);
+                    })
+
+            }
+            else if(result.email == "seretarydc@staff.edu.pk")
+            {
+                const myquery = {
+                    seretaryDC: false
+                     }
+                     Clearance.find(myquery, (err,result) => {
+                        if(err)
+                        console.log(err);
+                        
+                        res.send(result);
+                    })
+
+            }
+            else if(result.email == "assistancetreasure@staff.edu.pk")
+            {
+                const myquery = {
+                    assistanceTreasure: false
+                     }
+                     Clearance.find(myquery, (err,result) => {
+                        if(err)
+                        console.log(err);
+                        
+                        res.send(result);
+                    })
+
+            }
+            else if(result.email == "networkadmin@staff.edu.pk")
+            {
+                const myquery = {
+                    networkAdmin: false
+                     }
+                     Clearance.find(myquery, (err,result) => {
+                        if(err)
+                        console.log(err);
+                        
+                        res.send(result);
+                    })
+
+            }
+            else if(result.email == "programcoordinator@staff.edu.pk")
+            {
+                const myquery = {
+                    programCoordinator: false
+                     }
+                     Clearance.find(myquery, (err,result) => {
+                        if(err)
+                        console.log(err);
+                        
+                        res.send(result);
+                    })
+
+            }
+            else if(result.email == "mainlibrary@staff.edu.pk")
+            {
+                const myquery = {
+                    mainLibrary: false
+                     }
+                     Clearance.find(myquery, (err,result) => {
+                        if(err)
+                        console.log(err);
+                        
+                        res.send(result);
+                    })
+
+            }
+            else if(result.email == "hostelsuperintendent@staff.edu.pk")
+            {
+                const myquery = {
+                    hostelSuperintendent: false
+                     }
+                     Clearance.find(myquery, (err,result) => {
+                        if(err)
+                        console.log(err);
+                        
+                        res.send(result);
+                    })
+
+            }
+            else if(result.email == "studentaffairscoordinator@staff.edu.pk")
+            {
+                const myquery = {
+                    studentAffairsCoordinator: false
+                     }
+                     Clearance.find(myquery, (err,result) => {
+                        if(err)
+                        console.log(err);
+                        
+                        res.send(result);
+                    })
+
+            }
+        } 
+    })
 })
 
 //delete request
@@ -530,14 +671,135 @@ app.delete("/deleteClreanceReq/:id", (req, res) => {
 
     try {
       
-    
         Clearance.findByIdAndRemove(req.params.id).exec();
         //if( !mongoose.Types.ObjectId.isValid(id) ) return false;
-        res.send("request deleted");
+        res.send("Request Deleted");
     } catch (err) {
         console.log(err);
     }
 });
 
+app.get("/usrCheckForReq", (req,res) => {
+    User.findById(whichUsr, (err,result) =>{
+        if(err)
+        console.log(err);
+        else{
+            const myquery = {
+                email: result.email
+                 }
+                 Clearance.find(myquery, (err,result) => {
+                    if(err)
+                    console.log(err);
+                    else
+                    res.send(result);
+                }) 
+        }
+    })
+})
 
+app.put("/updateReq/:id" ,(req,res) =>{
+    try {
+        Clearance.findById(req.params.id, (err,updatedStatus) => {
+            User.findById(whichUsr, (err,result) =>{
+                if(err)
+                    console.log(err);
+                    else{
+                        if(result.email == "examcoordinator@staff.edu.pk")
+                        {
+                            updatedStatus.examCoordinator = true;
+                            updatedStatus.save();
+                            res.send("updateStatus");
+                        }
+                        else if(result.email == "dc@staff.edu.pk")
+                        {
+                            updatedStatus.dc = true;
+                            updatedStatus.save();
+                            res.send("updateStatus");
+                        } 
+                        else if(result.email ==   "seretarydc@staff.edu.pk"    )
+                        {
+                            updatedStatus.seretaryDC = true;
+                            updatedStatus.save();
+                            res.send("updateStatus");
+                        } 
+                        else if(result.email == "networkadmin@staff.edu.pk")
+                        {
+                            updatedStatus.networkAdmin = true;
+                            updatedStatus.save();
+                            res.send("updateStatus");
+                        } 
+                        else if(result.email == "programcoordinator@staff.edu.pk")
+                        {
+                            updatedStatus.programCoordinator = true;
+                            updatedStatus.save();
+                            res.send("updateStatus");
+                        } 
+                        else if(result.email == "assistancetreasure@staff.edu.pk")
+                        {
+                            updatedStatus.assistanceTreasure = true;
+                            updatedStatus.save();
+                            res.send("updateStatus");
+                        } 
+                        else if(result.email == "mainlibrary@staff.edu.pk")
+                        {
+                            updatedStatus.mainLibrary = true;
+                            updatedStatus.save();
+                            res.send("updateStatus");
+                        } 
+                        else if(result.email == "hostelsuperintendent@staff.edu.pk")
+                        {
+                            updatedStatus.hostelSuperintendent= true;
+                            updatedStatus.save();
+                            res.send("updateStatus");
+                        } 
+                        else if(result.email == "studentaffairscoordinator@staff.edu.pk")
+                        {
+                            updatedStatus.studentAffairsCoordinator= true;
+                            updatedStatus.save();
+                            res.send("updateStatus");
+                        } 
+                        else if(result.email == "library@staff.edu.pk")
+                        {
+                            updatedStatus.library = true;
+                            updatedStatus.save();
+                            res.send("updateStatus");
+                        } 
+                    }    
+            })
+        })
+    }
+    catch (err) {
+        console.log(err);
+    }
+})
+
+app.get("/getUserInfo" ,(req,res) =>{
+    User.findById(whichUsr, (err,result) =>{
+        if(err)
+        console.log(err);
+        else
+        res.send(result);
+    })
+});
+
+
+//get clreance status at student side
+app.get("/getclearancestatus" ,(req,res) =>{
+    User.findById(whichUsr, (err,result) =>{
+        if(err)
+        console.log(err);
+        else{
+            const myquery = {
+                email: result.email
+                 }
+                 Clearance.find(myquery, (err,result) => {
+                    if(err)
+                    console.log(err);
+                    else
+                    res.send(result);
+                })
+
+        }
+    })
+});
 // Imran backend Code end//
