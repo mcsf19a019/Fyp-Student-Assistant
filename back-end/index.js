@@ -423,7 +423,8 @@ app.post("/insertUserByAdmin",async(req,res)=>
     const email=req.body.email;
     const password=req.body.password;
     const userType=req.body.userType;
-    const user=new User ({email:email,name:name,password:password,userType:userType});
+    console.log(userType);
+    const user=new User({email:email,name:name,password:password,userType:userType});
     try{
         await user.save();
     }catch(err)

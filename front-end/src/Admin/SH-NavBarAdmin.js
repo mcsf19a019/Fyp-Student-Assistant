@@ -28,14 +28,6 @@ const SHNavBarAdmin = () => {
                 </div>
 
             </nav>
-            <div className="nav-buttons">
-
-                <Link to="/tepostListAdmin" alt="Posts" className="SH-Admin-nav-button">Manage Posts</Link>
-
-                {/* <Link to="/tspostListAdmin" alt="allPosts" className="SH-Admin-nav-button">View Posts</Link>
-                    <button className="SH-Admin-nav-button">View Users</button>
-                    <Link to="/adminUserlists" className="SH-Admin-nav-button">Manage users</Link> */}
-            </div>
         </div>
 
 

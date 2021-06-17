@@ -34,7 +34,12 @@ const Clearnce = () => {
         
           ///get clreance status
         Axios.get("http://localhost:3001/getclearancestatus").then((Response) => {
-            setDCClearance(Response.data[0].dc);
+            if(Response.data == "")
+            {
+
+            }
+            else{
+                setDCClearance(Response.data[0].dc);
             setSecretaryDCClearance(Response.data[0].seretaryDC);
             setAssistanceTreasurer(Response.data[0].assistanceTreasure);
              setLibrary(Response.data[0].library);
@@ -44,6 +49,8 @@ const Clearnce = () => {
              setMainLibray(Response.data[0].mainLibrary);
              setHostelSuperintendent(Response.data[0].hostelSuperintendent);
              setStudentAffairsCoordinator(Response.data[0].studentAffairsCoordinator);
+            }
+            
 
            
             
